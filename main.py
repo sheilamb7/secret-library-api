@@ -9,8 +9,7 @@ origins = [
     # "*"
     "http://127.0.0.1:8000",
     "http://127.0.0.1:8000/challenges",
-    "http://127.0.0.1:8000/prompts/",
-    "http://127.0.0.1:5173"
+    "http://127.0.0.1:8000/prompts/*",
 ]
 
 app.add_middleware(
