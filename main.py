@@ -6,8 +6,13 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
+<<<<<<< HEAD
     # "*"
     "https://secret-library-react.onrender.com",	"https://secret-library-react.onrender.com/challenges/*"
+=======
+    "https://secret-library-react.onrender.com",
+    "https://secret-library-react.onrender.com/challenges/*"
+>>>>>>> 9c28d3cc0a91726f4feb1f890d72a2e9b538cccf
 ]
 
 app.add_middleware(
