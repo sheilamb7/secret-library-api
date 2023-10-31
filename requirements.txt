@@ -36,6 +36,6 @@ urllib3==1.26.14
 uvicorn==0.22.0
 virtualenv==20.21.0
 virtualenv-clone==0.5.7
-watchfiles==0.21.0
+watchfiles==0.20.0
 websockets==11.0.3
 Werkzeug==3.0.0
