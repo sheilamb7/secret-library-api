@@ -20,7 +20,7 @@ app.add_middleware(
 
 @app.get("/")
 def message():
-    return "<h1>API for secret library</h1><div>Includes challenges API and prompts API</div>"
+    return {"Secret Library API" : "Where all Secret Library's challenges and prompts are stored"}
 
 app.include_router(challenge_router)
 app.include_router(prompt_router)

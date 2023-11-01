@@ -34,7 +34,8 @@ prompts = [
     {"prompts_id" : 28, "prompts_challenge_id": 2, "prompts_content": "Read a book that starts with letter V", "prompts_completed" : 0, "prompts_completed_book": ""},
     {"prompts_id" : 29, "prompts_challenge_id": 2, "prompts_content": "Read a book that starts with letter W", "prompts_completed" : 0, "prompts_completed_book": ""},
     {"prompts_id" : 30, "prompts_challenge_id": 2, "prompts_content": "Read a book that starts with letter X", "prompts_completed" : 0, "prompts_completed_book": ""},
-    {"prompts_id" : 31, "prompts_challenge_id": 2, "prompts_content": "Read a book that starts with letter Y", "prompts_completed" : 0, "prompts_completed_book": ""}
+    {"prompts_id" : 31, "prompts_challenge_id": 2, "prompts_content": "Read a book that starts with letter Y", "prompts_completed" : 0, "prompts_completed_book": ""},
+    {"prompts_id" : 32, "prompts_challenge_id": 2, "prompts_content": "Read a book that starts with letter Z", "prompts_completed" : 0, "prompts_completed_book": ""}
 ]
 
 @router.get("/prompts")
@@ -60,13 +61,19 @@ def create_prompt(prompt: Prompt):
 
 @router.put("/prompts/{prompts_id}")
 def update_prompt(prompts_id: int, prompt: Prompt):
-    for index, item in enumerate(prompts):
-        if item['prompts_id'] == prompts_id:
-            prompt[index]['prompts_challenge_id'] = prompt.prompts_challenge_id
-            prompt[index]['prompts_name'] = prompt.prompts_content
-            prompt[index]['prompts_completed'] = prompt.prompts_completed
-            prompt[index]['prompts_completed_book'] = prompt.prompts_completed_book
-    return prompts
+    for p in prompts:
+        if p["prompts_id"] == prompts_id:
+            p["prompts_completed_book"] = prompt.prompts_completed_book
+            return {"message": "Book updated succesffully"}
+        return {"error" : "can't update book"}
+
+    # for index, item in enumerate(prompts):
+    #     if item['prompts_id'] == prompts_id:
+    #         prompt[index]['prompts_challenge_id'] = prompt.prompts_challenge_id
+    #         prompt[index]['prompts_name'] = prompt.prompts_content
+    #         prompt[index]['prompts_completed'] = prompt.prompts_completed
+    #         prompt[index]['prompts_completed_book'] = prompt.prompts_completed_book
+    # return prompts
 
 @router.delete("prompts/{prompts_id}")
 def delete_prompt(prompts_id: int):
