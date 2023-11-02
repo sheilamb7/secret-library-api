@@ -63,6 +63,9 @@ def create_prompt(prompt: Prompt):
 def update_prompt(prompts_id: int, prompt: Prompt):
     for p in prompts:
         if p["prompts_id"] == prompts_id:
+            p["prompts_challenge_id"] = prompt.prompts_challenge_id
+            p["prompts_content"] = prompt.prompts_content
+            p["prompts_completed"] = prompt.prompts_completed			
             p["prompts_completed_book"] = prompt.prompts_completed_book
             return {"message": "Book updated succesffully"}
         return {"error" : "can't update book"}
