@@ -50,25 +50,43 @@ def get_prompt(prompts_id: int):
 def get_prompt(prompts_challenge_id: int):
     return list(filter(lambda item:item['prompts_challenge_id'] == prompts_challenge_id, prompts))
 
-@router.get("/prompts/")
-def get_prompt_by_name(prompts_content: str):
-    return list(filter(lambda item:item['prompts_content'] == prompts_content, prompts))
-
-@router.post("/prompts")
+@router.post("/prompts/")
 def create_prompt(prompt: Prompt):
     prompts.append(prompt)
     return prompts
 
-@router.put("/prompts/{prompts_id}")
+@router.patch("/prompts/{prompts_id}")
 def update_prompt(prompts_id: int, prompt: Prompt):
     for p in prompts:
         if p["prompts_id"] == prompts_id:
+            p["prompts_id"] = prompt.prompts_id
             p["prompts_challenge_id"] = prompt.prompts_challenge_id
             p["prompts_content"] = prompt.prompts_content
-            p["prompts_completed"] = prompt.prompts_completed			
             p["prompts_completed_book"] = prompt.prompts_completed_book
-            return {"message": "Book updated succesffully"}
-        return {"error" : "can't update book"}
+            return {
+                "Success": "prompt updated",
+                "prompts_id(slug)": prompts_id,
+                "prompts(prompts_id)": prompt.prompts_id,
+                "prompts_completed_book": prompt.prompts_completed_book
+            }
+    else:
+        return {
+            "error": "prompt not found",
+            "prompts_id(slug)": prompts_id,
+            "prompts(prompts_id)": prompt.prompts_id,
+            "prompts_completed_book": prompt.prompts_completed_book
+        }
+        
+	
+	# for p in prompt:
+        # if p["prompts_id"] == prompts_id:
+            # p["prompts_id"] = prompt.prompts_id
+            # p["prompts_challenge_id"] = prompt.prompts_challenge_id
+            # p["prompts_content"] = prompt.prompts_content
+            # p["prompts_completed"] = prompt.prompts_completed			
+            # p["prompts_completed_book"] = prompt.prompts_completed_book
+        # return {"message": "Book updated succesffully", "completed_book": prompt.prompts_completed_book, "p[prompts_id": p["prompts_id"], "prompts_id": prompts_id}
+    # return {"error" : "can't update book", "p[prompts_id": p["prompts_id"], "prompts_id": prompts_id}
 
     # for index, item in enumerate(prompts):
     #     if item['prompts_id'] == prompts_id:
@@ -77,10 +95,3 @@ def update_prompt(prompts_id: int, prompt: Prompt):
     #         prompt[index]['prompts_completed'] = prompt.prompts_completed
     #         prompt[index]['prompts_completed_book'] = prompt.prompts_completed_book
     # return prompts
-
-@router.delete("prompts/{prompts_id}")
-def delete_prompt(prompts_id: int):
-    for item in prompts:
-        if item['prompts_id'] == prompts_id:
-            prompts.remove(item)
-    return prompts

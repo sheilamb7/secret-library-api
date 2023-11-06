@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
+    "http://127.0.0.1:5173",
     "https://secret-library-react.onrender.com",
     "https://secret-library-react.onrender.com/challenges/*"
 ]
