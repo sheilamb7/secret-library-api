@@ -95,3 +95,10 @@ def update_prompt(prompts_id: int, prompt: Prompt):
     #         prompt[index]['prompts_completed'] = prompt.prompts_completed
     #         prompt[index]['prompts_completed_book'] = prompt.prompts_completed_book
     # return prompts
+
+@router.delete("prompts/{prompts_id}")
+def delete_challenge(prompts_id: int):
+    for p in prompts:
+        if p['prompts_id'] == prompts_id:
+            prompts.remove(p)
+    return prompts
